@@ -1,6 +1,7 @@
 // src/components/planner/TaskBreakdown.jsx
 import React, { useState } from "react";
 import { breakdownTask } from "../../services/breakdownService";
+import SpeakButton from "../voice/SpeakButton.jsx";
 
 export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) {
   const [generating, setGenerating] = useState(false);
@@ -59,6 +60,9 @@ export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) 
             <input type="checkbox" checked={s.done} onChange={() => onToggleSubtask(task.id, s.id)} />
             <span style={{ textDecoration: s.done ? "line-through" : "none", color: s.done ? "var(--text-dim)" : "var(--text)" }}>
               {s.title}
+            </span>
+            <span onClick={(e) => e.preventDefault()} style={{ marginLeft: "auto" }}>
+              <SpeakButton text={s.title} size={22} />
             </span>
           </label>
         ))}

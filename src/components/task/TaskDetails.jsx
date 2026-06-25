@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import { breakdownTask } from "../../services/breakdownService";
 import { formatDeadlineDate, formatTimeRemaining, riskLevel, RISK_COLORS } from "../../utils/deadlineUtils";
+import { useVoiceContext } from "../../context/VoiceContext";
+import SpeakButton from "../voice/SpeakButton.jsx";
 
 export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubtasks, onComplete }) {
   const [generating, setGenerating] = useState(false);
+  const { speak, settings } = useVoiceContext();
   if (!task) return null;
 
   const risk = riskLevel(task.deadline, task.effortHours);
@@ -71,21 +74,35 @@ export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubta
 
         <div style={{ marginTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h4 style={{ fontSize: 13, color: "var(--text-muted)" }}>Sub-steps</h4>
-          <button
-            onClick={handleBreakdown}
-            disabled={generating}
-            style={{
-              background: "var(--focus-dim)",
-              color: "var(--focus)",
-              border: "none",
-              borderRadius: "var(--radius-sm)",
-              padding: "5px 10px",
-              fontSize: 12,
-              fontWeight: 600,
-            }}
-          >
-            {generating ? "Breaking down…" : "AI breakdown"}
-          </button>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {(task.subtasks || []).length > 0 && (
+              <SpeakButton
+                text={
+                  settings.language === "hi"
+                    ? `${task.title} ke liye steps: ` +
+                      task.subtasks.map((s, i) => `${i + 1}. ${s.title}`).join(". ")
+                    : `Steps for ${task.title}: ` +
+                      task.subtasks.map((s, i) => `Step ${i + 1}: ${s.title}`).join(". ")
+                }
+                size={26}
+              />
+            )}
+            <button
+              onClick={handleBreakdown}
+              disabled={generating}
+              style={{
+                background: "var(--focus-dim)",
+                color: "var(--focus)",
+                border: "none",
+                borderRadius: "var(--radius-sm)",
+                padding: "5px 10px",
+                fontSize: 12,
+                fontWeight: 600,
+              }}
+            >
+              {generating ? "Breaking down…" : "AI breakdown"}
+            </button>
+          </div>
         </div>
 
         <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
@@ -115,6 +132,9 @@ export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubta
               {s.estimatedMinutes && (
                 <span style={{ marginLeft: "auto", fontSize: 11, color: "var(--text-dim)" }}>{s.estimatedMinutes}m</span>
               )}
+              <span onClick={(e) => e.preventDefault()}>
+                <SpeakButton text={s.title} size={22} />
+              </span>
             </label>
           ))}
         </div>

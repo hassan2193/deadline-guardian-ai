@@ -36,7 +36,7 @@ This shift from reminders to action-oriented assistance helps users make better 
 
 ---
 
-## Key Features
+# Key Features
 
 ### 🤖 AI Task Analysis
 
@@ -68,6 +68,15 @@ This shift from reminders to action-oriented assistance helps users make better 
 - Suggests immediate next actions
 - Identifies at-risk tasks before deadlines are missed
 
+### 🔊 AI Voice Coach
+
+- Reads AI-generated coaching messages aloud
+- Supports both English and Hindi
+- Automatic voice alerts for critical and high-risk tasks
+- Manual playback of AI recommendations
+- User-configurable voice settings with Speech Synthesis API
+- Improves accessibility and proactive user engagement
+
 ### ⚠️ Risk Detection Engine
 
 - Detects deadline collisions
@@ -93,7 +102,7 @@ This shift from reminders to action-oriented assistance helps users make better 
 
 ---
 
-## Google Technologies Utilized
+# Google Technologies Utilized
 
 ### Google AI Studio
 
@@ -120,18 +129,20 @@ Used for:
 
 ---
 
-## Technical Architecture
+# Technical Architecture
 
 ```text
 Frontend (React + Vite)
         ↓
-Task Context Layer
+React Context API
         ↓
 AI Service Layer
         ↓
 Gemini API
         ↓
 Fallback Heuristic Engine
+        ↓
+Browser Local Storage
 ```
 
 ### Project Structure
@@ -150,7 +161,7 @@ src/
 
 ---
 
-## Technology Stack
+# Technology Stack
 
 ### Frontend
 
@@ -167,6 +178,12 @@ src/
 
 - Gemini API
 - Google AI Studio
+- Prompt Engineering
+
+### Browser APIs
+
+- Web Speech API
+- Speech Synthesis API
 
 ### Persistence
 
@@ -174,23 +191,23 @@ src/
 
 ### Deployment
 
-- Google AI Studio Deployment
 - Google Cloud Run
 
 ---
 
-## Innovation Highlights
+# Innovation Highlights
 
 - Action-oriented productivity assistant instead of passive reminders
 - AI-generated execution plans rather than simple task lists
 - Context-aware coaching system
+- AI Voice Coach with bilingual speech support
 - Deadline conflict detection
 - Offline AI fallback architecture
 - Voice-enabled task management
 
 ---
 
-## Impact
+# Impact
 
 Deadline Guardian AI helps users:
 
@@ -204,7 +221,7 @@ The platform transforms productivity management from a reminder system into an i
 
 ---
 
-## Future Enhancements
+# Future Enhancements
 
 - Google Calendar Integration
 - Gmail-based task extraction
@@ -216,7 +233,7 @@ The platform transforms productivity management from a reminder system into an i
 
 ---
 
-## Demo Flow
+# Demo Flow
 
 1. Add a task using text or voice.
 2. Analyze task with AI.
@@ -224,13 +241,14 @@ The platform transforms productivity management from a reminder system into an i
 4. View AI-prioritized task ranking.
 5. Generate a personalized daily schedule.
 6. Review AI coaching recommendations.
-7. Track progress and productivity metrics.
+7. Listen to AI Voice Coach guidance.
+8. Track progress and productivity metrics.
 
 ---
 
-## Developed For
+# Developed For
 
 **Google AI Studio x BlockseBlock Hackathon 2026**
 
-Problem Statement:
+**Problem Statement:**
 **The Last-Minute Life Saver**

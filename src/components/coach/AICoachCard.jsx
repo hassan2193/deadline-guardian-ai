@@ -1,9 +1,28 @@
 // src/components/coach/AICoachCard.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { RISK_COLORS, RISK_LABELS } from "../../utils/deadlineUtils";
+import { useVoiceContext } from "../../context/VoiceContext";
+import { buildSpokenNudge } from "../../utils/voiceMessages";
+import SpeakButton from "../voice/SpeakButton.jsx";
 
 export default function AICoachCard({ task, nudge, risk }) {
   const color = RISK_COLORS[risk];
+  const { speak, settings } = useVoiceContext();
+  const spokenRef = useRef(false);
+
+  const spokenText = buildSpokenNudge(task, risk, settings.language);
+
+  // Auto-speak once per card mount, only for critical/high risk tasks,
+  // and only if the user hasn't turned auto-speak off.
+  useEffect(() => {
+    if (spokenRef.current) return;
+    if (!settings.autoSpeak) return;
+    if (risk !== "critical" && risk !== "high") return;
+    spokenRef.current = true;
+    speak(spokenText, { urgent: risk === "critical" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [task.id, risk, settings.autoSpeak, settings.language]);
+
   return (
     <div
       style={{
@@ -23,13 +42,14 @@ export default function AICoachCard({ task, nudge, risk }) {
           flexShrink: 0,
         }}
       />
-      <div>
+      <div style={{ flex: 1 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <span style={{ fontSize: 12, fontWeight: 700, color }}>{RISK_LABELS[risk]}</span>
           <span style={{ fontSize: 13, color: "var(--text-muted)" }}>{task.title}</span>
         </div>
         <p style={{ fontSize: 14, marginTop: 6 }}>{nudge}</p>
       </div>
+      <SpeakButton text={spokenText} urgent={risk === "critical"} />
     </div>
   );
 }

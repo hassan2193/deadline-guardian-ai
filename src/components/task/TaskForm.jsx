@@ -18,9 +18,14 @@ export default function TaskForm({ onAdd }) {
   const [deadline, setDeadline] = useState("");
   const [analyzing, setAnalyzing] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [error, setError] = useState("");
 
   async function handleAnalyze() {
-    if (!rawText.trim()) return;
+    if (!rawText.trim()) {
+      setError("Please type or speak a task before analyzing.");
+      return;
+    }
+    setError("");
     setAnalyzing(true);
     try {
       const result = await analyzeTaskText(rawText);
@@ -49,6 +54,7 @@ export default function TaskForm({ onAdd }) {
     setRawText("");
     setDeadline("");
     setPreview(null);
+    setError("");
   }
 
   return (
@@ -62,10 +68,13 @@ export default function TaskForm({ onAdd }) {
     >
       <div style={{ display: "flex", gap: 10 }}>
         <input
-          style={inputStyle}
+          style={{ ...inputStyle, border: error ? "1px solid var(--urgent)" : inputStyle.border }}
           placeholder='Type a task, e.g. "Submit assignment by Friday 6pm"'
           value={rawText}
-          onChange={(e) => setRawText(e.target.value)}
+          onChange={(e) => {
+            setRawText(e.target.value);
+            if (error) setError("");
+          }}
           onKeyDown={(e) => e.key === "Enter" && handleAnalyze()}
         />
         <VoiceTaskInput onResult={(text) => setRawText(text)} />
@@ -86,6 +95,10 @@ export default function TaskForm({ onAdd }) {
           {analyzing ? "Analyzing…" : "Analyze with AI"}
         </button>
       </div>
+
+      {error && (
+        <div style={{ fontSize: 12, color: "var(--urgent)", marginTop: 6 }}>{error}</div>
+      )}
 
       {preview && (
         <div

@@ -1,10 +1,14 @@
 // src/components/coach/Recommendations.jsx
 import React, { useEffect, useState } from "react";
 import { scanForRisks } from "../../services/riskService";
+import { useVoiceContext } from "../../context/VoiceContext";
+import { buildSpokenWarning } from "../../utils/voiceMessages";
+import SpeakButton from "../voice/SpeakButton.jsx";
 
 export default function Recommendations({ tasks }) {
   const [warnings, setWarnings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { settings } = useVoiceContext();
 
   useEffect(() => {
     let active = true;
@@ -45,9 +49,13 @@ export default function Recommendations({ tasks }) {
               background: "var(--warn-dim)",
               color: "var(--warn)",
               borderRadius: "var(--radius-sm)",
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
             }}
           >
-            {w.message}
+            <span style={{ flex: 1 }}>{w.message}</span>
+            <SpeakButton text={buildSpokenWarning(w.message, settings.language)} size={24} />
           </div>
         ))}
       </div>

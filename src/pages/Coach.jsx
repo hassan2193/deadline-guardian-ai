@@ -3,6 +3,7 @@ import React from "react";
 import { useTasks } from "../hooks/useTasks";
 import NudgesPanel from "../components/coach/NudgesPanel.jsx";
 import Recommendations from "../components/coach/Recommendations.jsx";
+import VoiceSettings from "../components/voice/VoiceSettings.jsx";
 
 export default function Coach() {
   const { pendingTasks } = useTasks();
@@ -19,6 +20,7 @@ export default function Coach() {
         </p>
       </div>
 
+      <VoiceSettings />
       <NudgesPanel tasks={pendingTasks} />
       <Recommendations tasks={pendingTasks} />
     </div>

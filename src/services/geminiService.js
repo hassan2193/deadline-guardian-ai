@@ -23,7 +23,10 @@ function stripFences(text) {
  * Throws if the API key is missing or the call/parse fails — callers should
  * catch this and use their local heuristic fallback.
  */
-export async function generateJSON(prompt, { model = "gemini-1.5-flash" } = {}) {
+export async function generateJSON(
+  prompt,
+  { model = "gemini-2.5-flash" } = {},
+) {
   if (!API_KEY) {
     throw new Error("AI not configured: missing VITE_GEMINI_API_KEY");
   }

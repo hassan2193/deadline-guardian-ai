@@ -1,11 +1,8 @@
-// src/prompts/prioritizationPrompt.js
-// Used to ask the model to re-rank a task list with a short rationale per task.
-
 export function buildPrioritizationPrompt(tasks) {
   const list = tasks
     .map(
       (t, i) =>
-        `${i + 1}. id=${t.id} | "${t.title}" | importance=${t.importance}/5 | effort=${t.effortHours}h | deadline=${t.deadline} | status=${t.status}`
+        `${i + 1}. id=${t.id} | "${t.title}" | importance=${t.importance}/5 | effort=${t.effortHours}h | deadline=${t.deadline} | status=${t.status}`,
     )
     .join("\n");
 

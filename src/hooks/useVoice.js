@@ -1,8 +1,3 @@
-// src/hooks/useVoice.js
-// Wraps the browser SpeechSynthesis API to let the AI "speak" nudges and
-// coaching messages out loud, instead of relying on text the user can
-// scroll past and ignore.
-
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const SETTINGS_KEY = "dg_voice_settings_v1";
@@ -10,8 +5,8 @@ const SETTINGS_KEY = "dg_voice_settings_v1";
 const DEFAULT_SETTINGS = {
   enabled: true, // master on/off
   autoSpeak: true, // speak automatically for high-risk / critical tasks
-  language: "en", // "en" | "hi"
-  tone: "casual", // "casual" (bhai/dost) | "professional"
+  language: "en",
+  tone: "casual",
 };
 
 function loadSettings() {
@@ -36,7 +31,7 @@ function pickVoice(voices, language) {
   );
   if (match) return match;
 
-  // Fall back to any English voice (most browsers always ship one),
+  // Fall back to any English voice
   // since Hindi voices aren't installed on every system.
   const fallback = voices.find((v) => v.lang?.toLowerCase().startsWith("en"));
   return fallback || voices[0];

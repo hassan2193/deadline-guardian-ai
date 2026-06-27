@@ -1,8 +1,3 @@
-// src/components/voice/VoiceSettings.jsx
-// Lets the user control the AI Voice Coach: master on/off, whether
-// critical/high-risk tasks should be spoken automatically, the
-// language (English / Hindi), and a "test" button to preview the voice.
-
 import React from "react";
 import { useVoiceContext } from "../../context/VoiceContext";
 
@@ -75,7 +70,7 @@ export default function VoiceSettings() {
       settings.language === "hi"
         ? settings.tone === "professional"
           ? "Namaste, yeh aapka AI Voice Coach hai. अब koi bhi zaroori deadline miss nahi hogi."
-          : "Bhai, ye tumhara AI Voice Coach hai. अब important deadlines miss nahi hongi."
+          : "Dost, ye tumhara AI Voice Coach hai. अब important deadlines miss nahi hongi."
         : "Hey, this is your AI Voice Coach. You won't miss an important deadline again.";
     speak(sample, { force: true });
   };
@@ -98,13 +93,18 @@ export default function VoiceSettings() {
           <div style={labelStyle}>Voice coach</div>
           <div style={subLabelStyle}>Master switch for spoken nudges</div>
         </div>
-        <Toggle checked={settings.enabled} onChange={(v) => updateSettings({ enabled: v })} />
+        <Toggle
+          checked={settings.enabled}
+          onChange={(v) => updateSettings({ enabled: v })}
+        />
       </div>
 
       <div style={rowStyle}>
         <div>
           <div style={labelStyle}>Auto-speak risky tasks</div>
-          <div style={subLabelStyle}>Speak automatically for critical / at-risk tasks</div>
+          <div style={subLabelStyle}>
+            Speak automatically for critical / at-risk tasks
+          </div>
         </div>
         <Toggle
           checked={settings.autoSpeak}
@@ -132,8 +132,12 @@ export default function VoiceSettings() {
                 borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--border)",
                 cursor: "pointer",
-                background: settings.language === opt.id ? "var(--focus, #6c8cff)" : "var(--surface-raised)",
-                color: settings.language === opt.id ? "#fff" : "var(--text-muted)",
+                background:
+                  settings.language === opt.id
+                    ? "var(--focus, #6c8cff)"
+                    : "var(--surface-raised)",
+                color:
+                  settings.language === opt.id ? "#fff" : "var(--text-muted)",
               }}
             >
               {opt.label}
@@ -145,7 +149,9 @@ export default function VoiceSettings() {
       <div style={{ ...rowStyle, borderBottom: "none" }}>
         <div>
           <div style={labelStyle}>Tone</div>
-          <div style={subLabelStyle}>Casual ("bhai") or a more formal voice</div>
+          <div style={subLabelStyle}>
+            Casual ("dost") or a more formal voice
+          </div>
         </div>
         <div style={{ display: "flex", gap: 6 }}>
           {[
@@ -162,7 +168,10 @@ export default function VoiceSettings() {
                 borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--border)",
                 cursor: "pointer",
-                background: settings.tone === opt.id ? "var(--focus, #6c8cff)" : "var(--surface-raised)",
+                background:
+                  settings.tone === opt.id
+                    ? "var(--focus, #6c8cff)"
+                    : "var(--surface-raised)",
                 color: settings.tone === opt.id ? "#fff" : "var(--text-muted)",
               }}
             >

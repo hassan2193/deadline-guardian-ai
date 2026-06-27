@@ -1,4 +1,3 @@
-// src/components/coach/Recommendations.jsx
 import React, { useEffect, useState } from "react";
 import { scanForRisks } from "../../services/riskService";
 import { useVoiceContext } from "../../context/VoiceContext";
@@ -22,7 +21,6 @@ export default function Recommendations({ tasks }) {
     return () => {
       active = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks.length]);
 
   return (
@@ -34,16 +32,27 @@ export default function Recommendations({ tasks }) {
         padding: 16,
       }}
     >
-      <h4 style={{ fontSize: 14, color: "var(--text-muted)" }}>Schedule conflict scan</h4>
+      <h4 style={{ fontSize: 14, color: "var(--text-muted)" }}>
+        Schedule conflict scan
+      </h4>
       {loading && (
         <div style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 8 }}>
           Scanning your schedule with AI — this can take a few seconds…
         </div>
       )}
       {!loading && warnings.length === 0 && (
-        <div style={{ fontSize: 13, color: "var(--safe)", marginTop: 8 }}>No conflicts detected.</div>
+        <div style={{ fontSize: 13, color: "var(--safe)", marginTop: 8 }}>
+          No conflicts detected.
+        </div>
       )}
-      <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 8 }}>
+      <div
+        style={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+        }}
+      >
         {warnings.map((w, i) => (
           <div
             key={i}
@@ -59,7 +68,14 @@ export default function Recommendations({ tasks }) {
             }}
           >
             <span style={{ flex: 1 }}>{w.message}</span>
-            <SpeakButton text={buildSpokenWarning(w.message, settings.language, settings.tone)} size={24} />
+            <SpeakButton
+              text={buildSpokenWarning(
+                w.message,
+                settings.language,
+                settings.tone,
+              )}
+              size={24}
+            />
           </div>
         ))}
       </div>

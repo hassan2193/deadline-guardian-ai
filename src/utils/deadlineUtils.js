@@ -1,6 +1,3 @@
-// src/utils/deadlineUtils.js
-// Helpers for working with deadlines, time remaining, and risk windows.
-
 export function hoursUntil(deadlineISO) {
   const now = new Date();
   const deadline = new Date(deadlineISO);
@@ -36,7 +33,6 @@ export function formatDeadlineDate(deadlineISO) {
   });
 }
 
-// Risk bands drive color coding across the app.
 export function riskLevel(deadlineISO, effortHours = 1) {
   const hrs = hoursUntil(deadlineISO);
   if (hrs < 0) return "critical";

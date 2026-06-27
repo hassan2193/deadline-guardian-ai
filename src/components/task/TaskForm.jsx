@@ -1,4 +1,3 @@
-// src/components/task/TaskForm.jsx
 import React, { useState } from "react";
 import { analyzeTaskText } from "../../services/taskAnalysisService";
 import VoiceTaskInput from "../voice/VoiceTaskInput.jsx";
@@ -68,7 +67,10 @@ export default function TaskForm({ onAdd }) {
     >
       <div style={{ display: "flex", gap: 10 }}>
         <input
-          style={{ ...inputStyle, border: error ? "1px solid var(--urgent)" : inputStyle.border }}
+          style={{
+            ...inputStyle,
+            border: error ? "1px solid var(--urgent)" : inputStyle.border,
+          }}
           placeholder='Type a task, e.g. "Submit assignment by Friday 6pm"'
           value={rawText}
           onChange={(e) => {
@@ -97,7 +99,9 @@ export default function TaskForm({ onAdd }) {
       </div>
 
       {error && (
-        <div style={{ fontSize: 12, color: "var(--urgent)", marginTop: 6 }}>{error}</div>
+        <div style={{ fontSize: 12, color: "var(--urgent)", marginTop: 6 }}>
+          {error}
+        </div>
       )}
 
       {preview && (
@@ -114,11 +118,14 @@ export default function TaskForm({ onAdd }) {
         >
           <div style={{ fontSize: 13, color: "var(--text-muted)" }}>
             AI read this as:{" "}
-            <strong style={{ color: "var(--text)" }}>{preview.title}</strong> · {preview.category} ·
-            importance {preview.importance}/5 · ~{preview.effortHours}h effort
+            <strong style={{ color: "var(--text)" }}>{preview.title}</strong> ·{" "}
+            {preview.category} · importance {preview.importance}/5 · ~
+            {preview.effortHours}h effort
           </div>
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <label style={{ fontSize: 12, color: "var(--text-dim)" }}>Deadline</label>
+            <label style={{ fontSize: 12, color: "var(--text-dim)" }}>
+              Deadline
+            </label>
             <input
               type="datetime-local"
               style={{ ...inputStyle, width: 220 }}

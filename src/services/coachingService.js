@@ -1,4 +1,3 @@
-// src/services/coachingService.js
 import { generateJSON, isAIConfigured } from "./geminiService";
 import { buildCoachingPrompt } from "../prompts/coachingPrompt";
 import { riskLevel, formatTimeRemaining } from "../utils/deadlineUtils";
@@ -38,7 +37,10 @@ export async function getCoachingNudge(task) {
 
 export async function getNudgesForTasks(tasks) {
   const pending = tasks.filter((t) => t.status !== "done");
-  const withRisk = pending.map((t) => ({ task: t, risk: riskLevel(t.deadline, t.effortHours) }));
+  const withRisk = pending.map((t) => ({
+    task: t,
+    risk: riskLevel(t.deadline, t.effortHours),
+  }));
   const priority = withRisk
     .filter((x) => x.risk === "critical" || x.risk === "high")
     .sort((a, b) => (a.risk === "critical" ? -1 : 1));

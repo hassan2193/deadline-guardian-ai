@@ -1,13 +1,15 @@
-// src/components/voice/VoiceTaskInput.jsx
 import React, { useState, useRef } from "react";
 
 export default function VoiceTaskInput({ onResult }) {
   const [listening, setListening] = useState(false);
-  const [supported] = useState(() => "webkitSpeechRecognition" in window || "SpeechRecognition" in window);
+  const [supported] = useState(
+    () => "webkitSpeechRecognition" in window || "SpeechRecognition" in window,
+  );
   const recognitionRef = useRef(null);
 
   function start() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) return;
 
     const recognition = new SpeechRecognition();
@@ -49,7 +51,14 @@ export default function VoiceTaskInput({ onResult }) {
         color: listening ? "var(--urgent)" : "var(--text-muted)",
       }}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
         <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
         <path d="M19 11a7 7 0 0 1-14 0M12 18v4M8 22h8" strokeLinecap="round" />
       </svg>

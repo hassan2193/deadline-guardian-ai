@@ -1,7 +1,10 @@
-// src/components/task/TaskCard.jsx
 import React from "react";
 import RiskIndicator from "../planner/RiskIndicator.jsx";
-import { formatTimeRemaining, riskLevel, RISK_COLORS } from "../../utils/deadlineUtils";
+import {
+  formatTimeRemaining,
+  riskLevel,
+  RISK_COLORS,
+} from "../../utils/deadlineUtils";
 import { totalStepsProgress } from "../../utils/progressUtils";
 
 export default function TaskCard({ task, onComplete, onOpen }) {
@@ -28,23 +31,45 @@ export default function TaskCard({ task, onComplete, onOpen }) {
       <RiskIndicator deadline={task.deadline} effortHours={task.effortHours} />
 
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
-          <h4 style={{ fontSize: 15, fontWeight: 600, textDecoration: isDone ? "line-through" : "none" }}>
+        <div
+          style={{ display: "flex", justifyContent: "space-between", gap: 8 }}
+        >
+          <h4
+            style={{
+              fontSize: 15,
+              fontWeight: 600,
+              textDecoration: isDone ? "line-through" : "none",
+            }}
+          >
             {task.title}
           </h4>
           <span
             className="mono"
-            style={{ fontSize: 11, color, whiteSpace: "nowrap", fontWeight: 600 }}
+            style={{
+              fontSize: 11,
+              color,
+              whiteSpace: "nowrap",
+              fontWeight: 600,
+            }}
           >
             {isDone ? "Done" : formatTimeRemaining(task.deadline)}
           </span>
         </div>
 
         {task.description && (
-          <p style={{ fontSize: 13, color: "var(--text-muted)", marginTop: 4 }}>{task.description}</p>
+          <p style={{ fontSize: 13, color: "var(--text-muted)", marginTop: 4 }}>
+            {task.description}
+          </p>
         )}
 
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginTop: 10,
+          }}
+        >
           <span
             style={{
               fontSize: 11,

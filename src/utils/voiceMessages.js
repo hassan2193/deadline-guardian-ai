@@ -20,13 +20,11 @@ export function buildSpokenNudge(task, risk, language = "en", tone = "casual") {
   const professional = tone === "professional";
 
   if (language === "hi") {
-    const stepLine = nextStep
-      ? `${nextStep} se shuru karo.`
-      : `${task.title} shuru karo.`;
+    const stepLine = nextStep ? `${nextStep} se shuru karo.` : `${task.title} shuru karo.`;
     if (risk === "critical") {
       return professional
         ? `Dhyan dein. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Ise abhi shuru karna zaroori hai.`
-        : `Bhai, dhyan do. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Abhi shuru karna padega.`;
+        : `Dost, dhyan do. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Abhi shuru karna padega.`;
     }
     if (risk === "high") {
       return professional
@@ -44,9 +42,7 @@ export function buildSpokenNudge(task, risk, language = "en", tone = "casual") {
   }
 
   // English (default)
-  const stepLine = nextStep
-    ? `Start with ${nextStep}.`
-    : `Start "${task.title}".`;
+  const stepLine = nextStep ? `Start with ${nextStep}.` : `Start "${task.title}".`;
   if (risk === "critical") {
     return professional
       ? `Attention. ${task.title} has only ${remaining} left. ${stepLine} This needs to start immediately.`
@@ -63,11 +59,7 @@ export function buildSpokenNudge(task, risk, language = "en", tone = "casual") {
   return `${task.title} is on track with ${remaining} left. No rush yet.`;
 }
 
-export function buildSpokenWarning(
-  warningMessage,
-  language = "en",
-  tone = "casual",
-) {
+export function buildSpokenWarning(warningMessage, language = "en", tone = "casual") {
   if (language === "hi") {
     return tone === "professional"
       ? `Dhyan dein, ek scheduling samasya hai. ${warningMessage}`

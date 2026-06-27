@@ -1,4 +1,3 @@
-// src/components/planner/PriorityBoard.jsx
 import React from "react";
 import { quadrantFor, QUADRANT_META } from "../../utils/priorityUtils";
 import { formatTimeRemaining } from "../../utils/deadlineUtils";
@@ -25,13 +24,41 @@ export default function PriorityBoard({ tasks, onOpen }) {
             minHeight: 140,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-            <span style={{ width: 8, height: 8, borderRadius: 999, background: g.meta.color }} />
-            <span style={{ fontSize: 13, fontWeight: 600 }}>{g.meta.label}</span>
-            <span style={{ fontSize: 12, color: "var(--text-dim)", marginLeft: "auto" }}>{g.items.length}</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 10,
+            }}
+          >
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 999,
+                background: g.meta.color,
+              }}
+            />
+            <span style={{ fontSize: 13, fontWeight: 600 }}>
+              {g.meta.label}
+            </span>
+            <span
+              style={{
+                fontSize: 12,
+                color: "var(--text-dim)",
+                marginLeft: "auto",
+              }}
+            >
+              {g.items.length}
+            </span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            {g.items.length === 0 && <div style={{ fontSize: 12, color: "var(--text-dim)" }}>Nothing here.</div>}
+            {g.items.length === 0 && (
+              <div style={{ fontSize: 12, color: "var(--text-dim)" }}>
+                Nothing here.
+              </div>
+            )}
             {g.items.map((t) => (
               <div
                 key={t.id}
@@ -48,7 +75,10 @@ export default function PriorityBoard({ tasks, onOpen }) {
                 }}
               >
                 <span>{t.title}</span>
-                <span className="mono" style={{ fontSize: 11, color: "var(--text-dim)" }}>
+                <span
+                  className="mono"
+                  style={{ fontSize: 11, color: "var(--text-dim)" }}
+                >
                   {formatTimeRemaining(t.deadline)}
                 </span>
               </div>

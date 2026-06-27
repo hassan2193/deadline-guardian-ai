@@ -1,4 +1,3 @@
-// src/hooks/useSchedule.js
 import { useState, useCallback } from "react";
 import { generateDailySchedule } from "../services/schedulingService";
 

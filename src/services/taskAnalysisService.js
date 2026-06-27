@@ -1,13 +1,35 @@
-// src/services/taskAnalysisService.js
 import { generateJSON, isAIConfigured } from "./geminiService";
 import { buildTaskAnalysisPrompt } from "../prompts/taskAnalysisPrompt";
 
 const CATEGORY_KEYWORDS = [
-  { category: "Academic", words: ["assignment", "exam", "homework", "thesis", "lecture", "submit", "report"] },
-  { category: "Bills", words: ["bill", "payment", "invoice", "rent", "emi", "due"] },
-  { category: "Career", words: ["interview", "resume", "application", "offer", "job"] },
-  { category: "Work", words: ["meeting", "client", "standup", "deck", "presentation", "project"] },
-  { category: "Health", words: ["doctor", "appointment", "gym", "workout", "medicine"] },
+  {
+    category: "Academic",
+    words: [
+      "assignment",
+      "exam",
+      "homework",
+      "thesis",
+      "lecture",
+      "submit",
+      "report",
+    ],
+  },
+  {
+    category: "Bills",
+    words: ["bill", "payment", "invoice", "rent", "emi", "due"],
+  },
+  {
+    category: "Career",
+    words: ["interview", "resume", "application", "offer", "job"],
+  },
+  {
+    category: "Work",
+    words: ["meeting", "client", "standup", "deck", "presentation", "project"],
+  },
+  {
+    category: "Health",
+    words: ["doctor", "appointment", "gym", "workout", "medicine"],
+  },
   { category: "Habit", words: ["daily", "habit", "streak", "routine"] },
 ];
 

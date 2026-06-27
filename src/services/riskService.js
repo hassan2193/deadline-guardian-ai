@@ -1,10 +1,7 @@
-// src/services/riskService.js
 import { generateJSON, isAIConfigured } from "./geminiService";
 import { buildRiskPrompt } from "../prompts/riskPrompt";
 import { hoursUntil } from "../utils/deadlineUtils";
 
-// Local fallback: flags pairs of pending tasks whose deadlines are close
-// together but whose combined effort can't fit in the time available.
 function localRiskScan(tasks) {
   const pending = tasks.filter((t) => t.status !== "done");
   const warnings = [];

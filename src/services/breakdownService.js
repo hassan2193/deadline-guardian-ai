@@ -1,12 +1,8 @@
-// src/services/breakdownService.js
 import { generateJSON, isAIConfigured } from "./geminiService";
 import { buildBreakdownPrompt } from "../prompts/breakdownPrompt";
 
 const CACHE_KEY = "dg_breakdown_cache_v1";
 
-// Cache key includes title/deadline/effort, not just task.id, so an edited
-// task (renamed, re-scoped, deadline moved) gets a fresh breakdown instead
-// of silently reusing a stale cached result for the old version of itself.
 function cacheKeyFor(task) {
   return `${task.id}|${task.title}|${task.deadline}|${task.effortHours}`;
 }

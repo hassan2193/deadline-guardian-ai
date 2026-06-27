@@ -1,9 +1,7 @@
-// src/services/prioritizationService.js
 import { generateJSON, isAIConfigured } from "./geminiService";
 import { buildPrioritizationPrompt } from "../prompts/prioritizationPrompt";
 import { sortByPriority, priorityScore } from "../utils/priorityUtils";
 
-// Local fallback: deterministic formula-based ranking with a generated reason string.
 function localPrioritize(tasks) {
   const sorted = sortByPriority(tasks);
   return sorted.map((t, i) => ({
@@ -23,7 +21,10 @@ export async function prioritizeTasks(tasks) {
     const result = await generateJSON(buildPrioritizationPrompt(tasks));
     return result.ranking;
   } catch (err) {
-    console.warn("AI prioritization failed, using local fallback:", err.message);
+    console.warn(
+      "AI prioritization failed, using local fallback:",
+      err.message,
+    );
     return localPrioritize(tasks);
   }
 }

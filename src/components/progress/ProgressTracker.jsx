@@ -1,4 +1,3 @@
-// src/components/progress/ProgressTracker.jsx
 import React from "react";
 
 export default function ProgressTracker({ tasks }) {
@@ -20,19 +19,36 @@ export default function ProgressTracker({ tasks }) {
         padding: 18,
       }}
     >
-      <h4 style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 14 }}>Progress by category</h4>
+      <h4
+        style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 14 }}
+      >
+        Progress by category
+      </h4>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {entries.map(([cat, v]) => {
           const pct = v.total ? Math.round((v.done / v.total) * 100) : 0;
           return (
             <div key={cat}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginBottom: 4 }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  marginBottom: 4,
+                }}
+              >
                 <span style={{ color: "var(--text-muted)" }}>{cat}</span>
                 <span className="mono" style={{ color: "var(--text-dim)" }}>
                   {v.done}/{v.total}
                 </span>
               </div>
-              <div style={{ height: 6, background: "var(--surface-raised)", borderRadius: 999 }}>
+              <div
+                style={{
+                  height: 6,
+                  background: "var(--surface-raised)",
+                  borderRadius: 999,
+                }}
+              >
                 <div
                   style={{
                     height: "100%",
@@ -46,7 +62,11 @@ export default function ProgressTracker({ tasks }) {
             </div>
           );
         })}
-        {entries.length === 0 && <div style={{ fontSize: 13, color: "var(--text-dim)" }}>No tasks yet.</div>}
+        {entries.length === 0 && (
+          <div style={{ fontSize: 13, color: "var(--text-dim)" }}>
+            No tasks yet.
+          </div>
+        )}
       </div>
     </div>
   );

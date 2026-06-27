@@ -1,7 +1,10 @@
-// src/hooks/useProgress.js
 import { useMemo } from "react";
 import { useTaskContext } from "../context/TaskContext";
-import { completionRate, tasksDueToday, tasksMissed } from "../utils/progressUtils";
+import {
+  completionRate,
+  tasksDueToday,
+  tasksMissed,
+} from "../utils/progressUtils";
 import { calculateStreak } from "../utils/calculateStreak";
 
 export function useProgress() {
@@ -15,7 +18,7 @@ export function useProgress() {
       total: tasks.length,
       done: tasks.filter((t) => t.status === "done").length,
     }),
-    [tasks]
+    [tasks],
   );
 
   const streak = useMemo(() => calculateStreak(completionLog), [completionLog]);

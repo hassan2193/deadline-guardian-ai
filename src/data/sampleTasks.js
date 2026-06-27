@@ -1,6 +1,3 @@
-// src/data/sampleTasks.js
-// Seed data so the app is demo-ready immediately, no setup required.
-
 const now = Date.now();
 const hrs = (h) => new Date(now + h * 60 * 60 * 1000).toISOString();
 

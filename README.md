@@ -1,135 +1,205 @@
 # Deadline Guardian AI
 
-## 🚀 The Last-Minute Life Saver
+> 🚀 **The Last-Minute Life Saver**
 
-**Deadline Guardian AI** is an AI-powered productivity companion designed to help users take action before deadlines are missed.
+An AI-powered productivity companion that goes beyond passive reminders by helping users prioritize, plan, schedule, and complete tasks before deadlines are missed.
 
-Unlike traditional reminder applications that simply notify users about upcoming tasks, Deadline Guardian AI proactively analyzes, prioritizes, schedules, breaks down, and guides users through task completion using AI-driven decision support.
-
-Built for the **"The Last-Minute Life Saver"** challenge, the platform focuses on turning intentions into completed outcomes.
+Built using **React**, **Vite**, and **Google Gemini AI** for the **Google AI Studio × BlockseBlock Hackathon 2026**.
 
 ---
 
-## Problem Statement
+## 🌐 Live Demo
 
-Students, professionals, and entrepreneurs frequently miss assignments, meetings, bill payments, interviews, and personal commitments because existing productivity tools rely on passive reminders that are easy to ignore.
-
-The challenge was to create a solution that goes beyond reminders and actively helps users complete their tasks before deadlines are missed.
+https://your-deployment-url
 
 ---
 
-## Solution Overview
+## 📂 GitHub Repository
 
-Deadline Guardian AI acts as an intelligent productivity coach.
-
-The system continuously evaluates task urgency, importance, effort requirements, scheduling conflicts, and available time to provide actionable guidance rather than generic notifications.
-
-Instead of saying:
-
-> "Your assignment is due tomorrow."
-
-The system says:
-
-> "You have 5 hours remaining. Start the research section now. Estimated completion time: 45 minutes."
-
-This shift from reminders to action-oriented assistance helps users make better decisions and complete work more effectively.
+https://github.com/hassan2193/deadline-guardian-ai
 
 ---
 
-# Key Features
+# 📸 Screenshots
 
-### 🤖 AI Task Analysis
+## Dashboard
 
-- Analyzes task descriptions
-- Estimates urgency, importance, and effort
-- Categorizes tasks automatically
+![Dashboard](assets/dashboard.png)
 
-### 📊 Intelligent Prioritization
+---
 
-- AI-powered priority scoring
-- Eisenhower Matrix integration
-- Dynamic task ranking based on deadlines and impact
+## AI Planner
 
-### 🧩 Autonomous Task Breakdown
+![Planner](assets/planner.png)
 
-- Converts large goals into actionable subtasks
-- Generates estimated completion times
-- Creates execution-ready workflows
+---
 
-### 📅 AI Daily Schedule Generator
+## AI Coach
 
-- Builds realistic time-blocked schedules
-- Includes work sessions and breaks
-- Optimizes available time across all pending tasks
+![Coach](assets/coach.png)
 
-### 🎯 Context-Aware Productivity Coach
+---
 
-- Provides personalized productivity nudges
-- Suggests immediate next actions
-- Identifies at-risk tasks before deadlines are missed
+## Progress Dashboard
 
-### 🔊 AI Voice Coach
+![Progress](assets/progress.png)
 
-- Reads AI-generated coaching messages aloud
-- Supports both English and Hindi
-- Automatic voice alerts for critical and high-risk tasks
-- Manual playback of AI recommendations
-- User-configurable voice settings with Speech Synthesis API
-- Improves accessibility and proactive user engagement
+---
 
-### ⚠️ Risk Detection Engine
+# 🚀 Problem Statement
 
-- Detects deadline collisions
-- Finds scheduling conflicts
-- Highlights overloaded work periods
+The Last-Minute Life Saver
 
-### 📈 Progress & Habit Tracking
+Build an AI-powered solution that goes beyond passive reminders and actively helps users complete important tasks before deadlines are missed.
 
-- Completion rate analytics
-- Streak tracking
-- Productivity insights dashboard
+---
 
-### 🎤 Voice Task Input
+# 💡 Solution Overview
+
+Deadline Guardian AI transforms passive reminders into intelligent execution guidance.
+
+Instead of simply notifying users about deadlines, it analyzes tasks, prioritizes work, generates schedules, detects risks, and provides personalized AI coaching to help users complete work on time.
+
+Example:
+
+Traditional Reminder
+
+> Assignment due tomorrow.
+
+Deadline Guardian AI
+
+> You have 5 hours remaining. Start the research section now. Estimated completion time: 45 minutes.
+
+---
+
+# ✨ Key Features
+
+## 🤖 AI Task Analysis
+
+- Task understanding using Gemini
+- Priority estimation
+- Category prediction
+- Effort estimation
+
+---
+
+## 📊 Intelligent Prioritization
+
+- Dynamic AI ranking
+- Eisenhower Matrix
+- Deadline-aware ordering
+
+---
+
+## 🧩 Autonomous Task Breakdown
+
+- AI-generated subtasks
+- Execution-ready workflow
+- Estimated completion times
+
+---
+
+## 📅 AI Daily Schedule
+
+- Time-blocked planning
+- Break scheduling
+- Workload optimization
+
+---
+
+## 🎯 AI Productivity Coach
+
+- Personalized productivity guidance
+- Professional & Casual coaching modes
+- Context-aware recommendations
+
+---
+
+## 🔊 AI Voice Coach
+
+- English & Hindi support
+- Automatic voice alerts
+- Manual playback
+- Speech Synthesis API
+
+---
+
+## ⚠️ Risk Detection
+
+- Deadline collision detection
+- Scheduling conflict analysis
+- Workload balancing
+
+---
+
+## 📈 Progress Tracking
+
+- Completion analytics
+- Productivity streaks
+- Performance insights
+
+---
+
+## 🎤 Voice Task Input
 
 - Hands-free task creation
-- Browser Speech Recognition support
-
-### 💾 Offline-First Architecture
-
-- Local persistence using browser storage
-- Fully functional without cloud connectivity
-- AI fallback mechanisms ensure reliability
+- Web Speech API
 
 ---
 
-# Google Technologies Utilized
+## 💾 Offline-First
 
-### Google AI Studio
-
-- Core AI development platform
-- Gemini prompt experimentation
-- AI workflow testing and deployment
-
-### Gemini API
-
-Used for:
-
-- Task analysis
-- Priority reasoning
-- Task breakdown generation
-- Daily schedule generation
-- Coaching recommendations
-- Risk assessment
-
-### Google Cloud Run (Deployment)
-
-- Managed deployment environment
-- Scalable application hosting
-- Public application access
+- Local Storage persistence
+- AI fallback logic
+- Works without network
 
 ---
 
-# Technical Architecture
+# 🛠 Technology Stack
+
+### Frontend
+
+- React.js
+- Vite
+- React Router
+
+### State Management
+
+- React Context API
+- Custom Hooks
+
+### AI
+
+- Google Gemini API
+- Google AI Studio
+- Prompt Engineering
+
+### Browser APIs
+
+- Web Speech API
+- Speech Synthesis API
+
+### Storage
+
+- Browser Local Storage
+
+### Development
+
+- JavaScript
+- HTML5
+- CSS3
+
+---
+
+# ☁ Google Technologies Utilized
+
+- Google AI Studio
+- Gemini API
+- Gemini-assisted branding assets
+
+---
+
+# 🏗 Architecture
 
 ```text
 Frontend (React + Vite)
@@ -145,110 +215,65 @@ Fallback Heuristic Engine
 Browser Local Storage
 ```
 
-### Project Structure
+---
 
-```text
-src/
-├── components/
-├── pages/
-├── context/
-├── hooks/
-├── services/
-├── prompts/
-├── utils/
-└── data/
+# 🚀 Getting Started
+
+```bash
+git clone https://github.com/hassan2193/deadline-guardian-ai
+
+cd deadline-guardian-ai
+
+npm install
+
+npm run dev
+```
+
+Create a `.env` file
+
+```env
+VITE_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 ```
 
 ---
 
-# Technology Stack
+# 💡 Innovation Highlights
 
-### Frontend
-
-- React.js
-- Vite
-- React Router
-
-### State Management
-
-- React Context API
-- Custom Hooks
-
-### AI Layer
-
-- Gemini API
-- Google AI Studio
-- Prompt Engineering
-
-### Browser APIs
-
-- Web Speech API
-- Speech Synthesis API
-
-### Persistence
-
-- Browser Local Storage
-
-### Deployment
-
-- Google Cloud Run
+- AI-first productivity assistant
+- Action-oriented guidance
+- AI Voice Coach
+- Professional & Casual coaching
+- Offline AI fallback
+- Voice task creation
+- Intelligent scheduling
 
 ---
 
-# Innovation Highlights
+# 📈 Impact
 
-- Action-oriented productivity assistant instead of passive reminders
-- AI-generated execution plans rather than simple task lists
-- Context-aware coaching system
-- AI Voice Coach with bilingual speech support
-- Deadline conflict detection
-- Offline AI fallback architecture
-- Voice-enabled task management
-
----
-
-# Impact
-
-Deadline Guardian AI helps users:
+Deadline Guardian AI helps users
 
 - Reduce missed deadlines
-- Improve task completion rates
-- Plan workloads more effectively
-- Develop sustainable productivity habits
-- Make better time-management decisions
-
-The platform transforms productivity management from a reminder system into an intelligent execution partner.
+- Improve productivity
+- Build consistent work habits
+- Receive contextual AI guidance
+- Complete work more effectively
 
 ---
 
-# Future Enhancements
+# 🔮 Future Scope
 
 - Google Calendar Integration
-- Gmail-based task extraction
+- Gmail Task Extraction
 - Firebase Authentication
-- Cross-device synchronization
-- Team collaboration features
-- Advanced productivity analytics
-- Mobile application support
+- Team Collaboration
+- Mobile App
+- Cross-device Sync
 
 ---
 
-# Demo Flow
+# 👨‍💻 Developed For
 
-1. Add a task using text or voice.
-2. Analyze task with AI.
-3. Generate actionable subtasks.
-4. View AI-prioritized task ranking.
-5. Generate a personalized daily schedule.
-6. Review AI coaching recommendations.
-7. Listen to AI Voice Coach guidance.
-8. Track progress and productivity metrics.
+**Google AI Studio × BlockseBlock Hackathon 2026**
 
----
-
-# Developed For
-
-**Google AI Studio x BlockseBlock Hackathon 2026**
-
-**Problem Statement:**
-**The Last-Minute Life Saver**
+**Problem Statement:** The Last-Minute Life Saver

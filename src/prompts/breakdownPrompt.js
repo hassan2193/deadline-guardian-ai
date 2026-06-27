@@ -1,6 +1,3 @@
-// src/prompts/breakdownPrompt.js
-// Used to split a large task into actionable sub-steps with mini-deadlines.
-
 export function buildBreakdownPrompt(task) {
   return `You are a planning assistant. Break this task into a sequence of small, concrete, actionable sub-steps a person can complete one at a time.
 

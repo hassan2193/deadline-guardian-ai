@@ -1,6 +1,3 @@
-// src/prompts/coachingPrompt.js
-// Used to generate a short, specific, motivating nudge for a task at risk.
-
 export function buildCoachingPrompt(task, riskLevel) {
   return `You are a calm, direct productivity coach. Write ONE short nudge (max 2 sentences, no fluff, no emoji) for this task.
 

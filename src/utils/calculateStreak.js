@@ -1,10 +1,9 @@
-// src/utils/calculateStreak.js
-// Computes a daily "on-time completion" streak from a log of completion dates.
-
 export function calculateStreak(completionLog = []) {
   if (!completionLog.length) return { current: 0, longest: 0 };
 
-  const days = [...new Set(completionLog.map((iso) => iso.slice(0, 10)))].sort();
+  const days = [
+    ...new Set(completionLog.map((iso) => iso.slice(0, 10))),
+  ].sort();
   let longest = 1;
   let run = 1;
   for (let i = 1; i < days.length; i++) {

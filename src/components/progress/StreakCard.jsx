@@ -1,4 +1,3 @@
-// src/components/progress/StreakCard.jsx
 import React from "react";
 
 export default function StreakCard({ streak }) {
@@ -14,14 +13,31 @@ export default function StreakCard({ streak }) {
       }}
     >
       <div>
-        <div style={{ fontSize: 28, fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--urgent)" }}>
+        <div
+          style={{
+            fontSize: 28,
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            color: "var(--urgent)",
+          }}
+        >
           {streak.current}
         </div>
         <div style={{ fontSize: 12, color: "var(--text-dim)" }}>Day streak</div>
       </div>
       <div>
-        <div style={{ fontSize: 28, fontFamily: "var(--font-display)", fontWeight: 700 }}>{streak.longest}</div>
-        <div style={{ fontSize: 12, color: "var(--text-dim)" }}>Longest streak</div>
+        <div
+          style={{
+            fontSize: 28,
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+          }}
+        >
+          {streak.longest}
+        </div>
+        <div style={{ fontSize: 12, color: "var(--text-dim)" }}>
+          Longest streak
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,9 @@
-// src/prompts/schedulePrompt.js
-// Used to generate a realistic day plan that slots pending tasks into time blocks.
-
 export function buildSchedulePrompt(tasks, options = {}) {
   const { dayStartHour = 9, dayEndHour = 22 } = options;
   const list = tasks
     .map(
       (t) =>
-        `- "${t.title}" | effort=${t.effortHours}h | deadline=${t.deadline} | importance=${t.importance}/5`
+        `- "${t.title}" | effort=${t.effortHours}h | deadline=${t.deadline} | importance=${t.importance}/5`,
     )
     .join("\n");
 

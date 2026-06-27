@@ -1,4 +1,3 @@
-// src/components/coach/NudgesPanel.jsx
 import React, { useEffect, useState } from "react";
 import { getNudgesForTasks } from "../../services/coachingService";
 import AICoachCard from "./AICoachCard.jsx";
@@ -19,11 +18,14 @@ export default function NudgesPanel({ tasks }) {
     return () => {
       active = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks.length]);
 
   if (loading) {
-    return <div style={{ fontSize: 13, color: "var(--text-dim)" }}>Reading your task list…</div>;
+    return (
+      <div style={{ fontSize: 13, color: "var(--text-dim)" }}>
+        Reading your task list…
+      </div>
+    );
   }
 
   if (!nudges.length) {
@@ -37,7 +39,8 @@ export default function NudgesPanel({ tasks }) {
           borderRadius: "var(--radius-md)",
         }}
       >
-        Nothing urgent right now. Good place to get ahead on something due later.
+        Nothing urgent right now. Good place to get ahead on something due
+        later.
       </div>
     );
   }
@@ -45,7 +48,12 @@ export default function NudgesPanel({ tasks }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       {nudges.map((n) => (
-        <AICoachCard key={n.task.id} task={n.task} nudge={n.nudge} risk={n.risk} />
+        <AICoachCard
+          key={n.task.id}
+          task={n.task}
+          nudge={n.nudge}
+          risk={n.risk}
+        />
       ))}
     </div>
   );

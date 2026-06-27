@@ -1,11 +1,9 @@
-// src/prompts/riskPrompt.js
-// Used to ask the model for a holistic risk read across the whole task list
-// (useful for catching conflicts a simple formula would miss, e.g. two
-// high-effort tasks due the same evening).
-
 export function buildRiskPrompt(tasks) {
   const list = tasks
-    .map((t) => `- "${t.title}" | effort=${t.effortHours}h | deadline=${t.deadline} | importance=${t.importance}/5`)
+    .map(
+      (t) =>
+        `- "${t.title}" | effort=${t.effortHours}h | deadline=${t.deadline} | importance=${t.importance}/5`,
+    )
     .join("\n");
 
   return `You are a risk-assessment assistant for a personal task list (current time: ${new Date().toISOString()}).

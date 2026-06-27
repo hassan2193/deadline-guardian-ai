@@ -21,7 +21,9 @@ export default function Dashboard() {
   const [openTaskId, setOpenTaskId] = useState(null);
   // Always look up the live task by id so updates (like AI breakdown results)
   // show up immediately instead of only after the panel is closed/reopened.
-  const openTask = openTaskId ? tasks.find((t) => t.id === openTaskId) || null : null;
+  const openTask = openTaskId
+    ? tasks.find((t) => t.id === openTaskId) || null
+    : null;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>

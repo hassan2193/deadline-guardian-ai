@@ -1,5 +1,3 @@
-// src/utils/progressUtils.js
-
 export function completionRate(tasks) {
   if (!tasks.length) return 0;
   const done = tasks.filter((t) => t.status === "done").length;
@@ -27,5 +25,9 @@ export function tasksMissed(tasks) {
 export function totalStepsProgress(task) {
   if (!task.subtasks || task.subtasks.length === 0) return null;
   const done = task.subtasks.filter((s) => s.done).length;
-  return { done, total: task.subtasks.length, pct: Math.round((done / task.subtasks.length) * 100) };
+  return {
+    done,
+    total: task.subtasks.length,
+    pct: Math.round((done / task.subtasks.length) * 100),
+  };
 }

@@ -1,6 +1,3 @@
-// src/prompts/taskAnalysisPrompt.js
-// Used to extract structured fields (importance, effort, category) from free-text task input.
-
 export function buildTaskAnalysisPrompt(rawText) {
   return `You are a productivity assistant that converts a raw task description into structured fields.
 Return ONLY valid JSON, no markdown fences, no preamble.

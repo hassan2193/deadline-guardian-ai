@@ -1,9 +1,12 @@
-// src/components/planner/TaskBreakdown.jsx
 import React, { useState } from "react";
 import { breakdownTask } from "../../services/breakdownService";
 import SpeakButton from "../voice/SpeakButton.jsx";
 
-export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) {
+export default function TaskBreakdown({
+  task,
+  onSetSubtasks,
+  onToggleSubtask,
+}) {
   const [generating, setGenerating] = useState(false);
   if (!task) return null;
 
@@ -13,7 +16,12 @@ export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) 
       const subs = await breakdownTask(task);
       onSetSubtasks(
         task.id,
-        subs.map((s, i) => ({ id: `${task.id}-gen-${i}`, title: s.title, done: false, estimatedMinutes: s.estimatedMinutes }))
+        subs.map((s, i) => ({
+          id: `${task.id}-gen-${i}`,
+          title: s.title,
+          done: false,
+          estimatedMinutes: s.estimatedMinutes,
+        })),
       );
     } finally {
       setGenerating(false);
@@ -29,9 +37,17 @@ export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) 
         padding: 16,
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <div>
-          <div style={{ fontSize: 12, color: "var(--text-dim)" }}>Top priority right now</div>
+          <div style={{ fontSize: 12, color: "var(--text-dim)" }}>
+            Top priority right now
+          </div>
           <h4 style={{ fontSize: 15, marginTop: 2 }}>{task.title}</h4>
         </div>
         <button
@@ -47,21 +63,50 @@ export default function TaskBreakdown({ task, onSetSubtasks, onToggleSubtask }) 
             fontWeight: 600,
           }}
         >
-          {generating ? "Breaking down…" : (task.subtasks?.length ? "Regenerate steps" : "Break it down")}
+          {generating
+            ? "Breaking down…"
+            : task.subtasks?.length
+              ? "Regenerate steps"
+              : "Break it down"}
         </button>
       </div>
 
-      <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 6 }}>
+      <div
+        style={{
+          marginTop: 12,
+          display: "flex",
+          flexDirection: "column",
+          gap: 6,
+        }}
+      >
         {(task.subtasks || []).map((s) => (
           <label
             key={s.id}
-            style={{ display: "flex", gap: 8, fontSize: 13, alignItems: "center", cursor: "pointer" }}
+            style={{
+              display: "flex",
+              gap: 8,
+              fontSize: 13,
+              alignItems: "center",
+              cursor: "pointer",
+            }}
           >
-            <input type="checkbox" checked={s.done} onChange={() => onToggleSubtask(task.id, s.id)} />
-            <span style={{ textDecoration: s.done ? "line-through" : "none", color: s.done ? "var(--text-dim)" : "var(--text)" }}>
+            <input
+              type="checkbox"
+              checked={s.done}
+              onChange={() => onToggleSubtask(task.id, s.id)}
+            />
+            <span
+              style={{
+                textDecoration: s.done ? "line-through" : "none",
+                color: s.done ? "var(--text-dim)" : "var(--text)",
+              }}
+            >
               {s.title}
             </span>
-            <span onClick={(e) => e.preventDefault()} style={{ marginLeft: "auto" }}>
+            <span
+              onClick={(e) => e.preventDefault()}
+              style={{ marginLeft: "auto" }}
+            >
               <SpeakButton text={s.title} size={22} />
             </span>
           </label>

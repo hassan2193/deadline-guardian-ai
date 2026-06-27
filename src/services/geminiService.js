@@ -1,8 +1,3 @@
-// src/services/geminiService.js
-// Thin wrapper around the Gemini API. If no API key is configured, every
-// caller in this app has a heuristic fallback, so the product still works
-// fully offline for a demo — it just uses local logic instead of a live model.
-
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const ENDPOINT = (model) =>
   `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`;
@@ -62,15 +57,6 @@ async function callGemini(prompt, model) {
   return JSON.parse(stripFences(text));
 }
 
-/**
- * Sends a single-turn prompt to Gemini and parses the response as JSON.
- * Throws if the API key is missing or the call/parse fails — callers should
- * catch this and use their local heuristic fallback.
- *
- * Uses gemini-2.5-flash-lite by default — it has a higher free-tier
- * requests-per-minute quota than gemini-2.5-flash, which matters more here
- * than the small quality difference for short tasks like breakdowns/nudges.
- */
 export async function generateJSON(
   prompt,
   { model = "gemini-2.5-flash-lite" } = {},

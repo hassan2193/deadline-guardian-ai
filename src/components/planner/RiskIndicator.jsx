@@ -1,10 +1,17 @@
-// src/components/planner/RiskIndicator.jsx
-// Signature element: a small countdown ring whose arc and color encode risk,
-// not just a colored dot. Reused across cards, planner, and coach.
 import React from "react";
-import { riskLevel, RISK_COLORS, RISK_LABELS, hoursUntil } from "../../utils/deadlineUtils";
+import {
+  riskLevel,
+  RISK_COLORS,
+  RISK_LABELS,
+  hoursUntil,
+} from "../../utils/deadlineUtils";
 
-export default function RiskIndicator({ deadline, effortHours = 1, size = 40, showLabel = false }) {
+export default function RiskIndicator({
+  deadline,
+  effortHours = 1,
+  size = 40,
+  showLabel = false,
+}) {
   const risk = riskLevel(deadline, effortHours);
   const color = RISK_COLORS[risk];
   const hrs = hoursUntil(deadline);
@@ -19,8 +26,20 @@ export default function RiskIndicator({ deadline, effortHours = 1, size = 40, sh
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ flexShrink: 0 }}>
-        <circle cx={size / 2} cy={size / 2} r={r} stroke="var(--border)" strokeWidth="3" fill="none" />
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        style={{ flexShrink: 0 }}
+      >
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          stroke="var(--border)"
+          strokeWidth="3"
+          fill="none"
+        />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -34,7 +53,9 @@ export default function RiskIndicator({ deadline, effortHours = 1, size = 40, sh
         />
       </svg>
       {showLabel && (
-        <span style={{ fontSize: 12, fontWeight: 600, color }}>{RISK_LABELS[risk]}</span>
+        <span style={{ fontSize: 12, fontWeight: 600, color }}>
+          {RISK_LABELS[risk]}
+        </span>
       )}
     </div>
   );

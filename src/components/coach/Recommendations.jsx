@@ -35,7 +35,11 @@ export default function Recommendations({ tasks }) {
       }}
     >
       <h4 style={{ fontSize: 14, color: "var(--text-muted)" }}>Schedule conflict scan</h4>
-      {loading && <div style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 8 }}>Scanning…</div>}
+      {loading && (
+        <div style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 8 }}>
+          Scanning your schedule with AI — this can take a few seconds…
+        </div>
+      )}
       {!loading && warnings.length === 0 && (
         <div style={{ fontSize: 13, color: "var(--safe)", marginTop: 8 }}>No conflicts detected.</div>
       )}

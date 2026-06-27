@@ -74,8 +74,8 @@ export default function VoiceSettings() {
     const sample =
       settings.language === "hi"
         ? settings.tone === "professional"
-          ? "Namaste, yeh aapka AI Voice Coach hai. Ab koi bhi zaroori deadline miss nahi hogi."
-          : "Bhai, ye tumhara AI Voice Coach hai. Ab important deadlines miss nahi hongi."
+          ? "Namaste, yeh aapka AI Voice Coach hai. अब koi bhi zaroori deadline miss nahi hogi."
+          : "Bhai, ye tumhara AI Voice Coach hai. अब important deadlines miss nahi hongi."
         : "Hey, this is your AI Voice Coach. You won't miss an important deadline again.";
     speak(sample, { force: true });
   };

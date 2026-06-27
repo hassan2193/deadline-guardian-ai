@@ -123,7 +123,7 @@ export default function App() {
             color: "var(--text-dim)",
           }}
         >
-          Built for the Last-Minute Life Saver hackathon brief.
+          Your AI-powered shield against missed deadlines.
         </div>
       </aside>
 

@@ -55,7 +55,7 @@ export default function Recommendations({ tasks }) {
             }}
           >
             <span style={{ flex: 1 }}>{w.message}</span>
-            <SpeakButton text={buildSpokenWarning(w.message, settings.language)} size={24} />
+            <SpeakButton text={buildSpokenWarning(w.message, settings.language, settings.tone)} size={24} />
           </div>
         ))}
       </div>

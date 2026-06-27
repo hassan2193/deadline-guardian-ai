@@ -73,7 +73,9 @@ export default function VoiceSettings() {
   const handleTest = () => {
     const sample =
       settings.language === "hi"
-        ? "Bhai, ye tumhara AI Voice Coach hai. Ab important deadlines miss nahi hongi."
+        ? settings.tone === "professional"
+          ? "Namaste, yeh aapka AI Voice Coach hai. Ab koi bhi zaroori deadline miss nahi hogi."
+          : "Bhai, ye tumhara AI Voice Coach hai. Ab important deadlines miss nahi hongi."
         : "Hey, this is your AI Voice Coach. You won't miss an important deadline again.";
     speak(sample, { force: true });
   };
@@ -110,7 +112,7 @@ export default function VoiceSettings() {
         />
       </div>
 
-      <div style={{ ...rowStyle, borderBottom: "none" }}>
+      <div style={rowStyle}>
         <div>
           <div style={labelStyle}>Language</div>
           <div style={subLabelStyle}>Voice used for spoken messages</div>
@@ -132,6 +134,36 @@ export default function VoiceSettings() {
                 cursor: "pointer",
                 background: settings.language === opt.id ? "var(--focus, #6c8cff)" : "var(--surface-raised)",
                 color: settings.language === opt.id ? "#fff" : "var(--text-muted)",
+              }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ ...rowStyle, borderBottom: "none" }}>
+        <div>
+          <div style={labelStyle}>Tone</div>
+          <div style={subLabelStyle}>Casual ("bhai") or a more formal voice</div>
+        </div>
+        <div style={{ display: "flex", gap: 6 }}>
+          {[
+            { id: "casual", label: "Casual" },
+            { id: "professional", label: "Professional" },
+          ].map((opt) => (
+            <button
+              key={opt.id}
+              onClick={() => updateSettings({ tone: opt.id })}
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                padding: "6px 12px",
+                borderRadius: "var(--radius-sm)",
+                border: "1px solid var(--border)",
+                cursor: "pointer",
+                background: settings.tone === opt.id ? "var(--focus, #6c8cff)" : "var(--surface-raised)",
+                color: settings.tone === opt.id ? "#fff" : "var(--text-muted)",
               }}
             >
               {opt.label}

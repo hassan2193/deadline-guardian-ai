@@ -14,31 +14,48 @@ function nextOpenSubtaskTitle(task) {
   return next ? next.title : null;
 }
 
-export function buildSpokenNudge(task, risk, language = "en") {
+export function buildSpokenNudge(task, risk, language = "en", tone = "casual") {
   const remaining = formatTimeRemaining(task.deadline);
   const nextStep = nextOpenSubtaskTitle(task);
+  const professional = tone === "professional";
 
   if (language === "hi") {
-    const stepLine = nextStep ? `${nextStep} se shuru karo.` : `${task.title} shuru karo.`;
+    const stepLine = nextStep
+      ? `${nextStep} se shuru karo.`
+      : `${task.title} shuru karo.`;
     if (risk === "critical") {
-      return `Bhai, dhyan do. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Abhi shuru karna padega.`;
+      return professional
+        ? `Dhyan dein. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Ise abhi shuru karna zaroori hai.`
+        : `Bhai, dhyan do. ${task.title} ke liye sirf ${remaining} bache hain. ${stepLine} Abhi shuru karna padega.`;
     }
     if (risk === "high") {
-      return `${task.title} ${remaining} mein due hai. ${stepLine} Aaj hi shuru kar do.`;
+      return professional
+        ? `${task.title} ${remaining} mein due hai. ${stepLine} Kripya aaj hi shuru karein.`
+        : `${task.title} ${remaining} mein due hai. ${stepLine} Aaj hi shuru kar do.`;
     }
     if (risk === "medium") {
-      return `${task.title} ${remaining} mein due hai. Thoda time hai, par jaldi shuru karo.`;
+      return professional
+        ? `${task.title} ${remaining} mein due hai. Samay hai, lekin jald shuru karna behtar hoga.`
+        : `${task.title} ${remaining} mein due hai. Thoda time hai, par jaldi shuru karo.`;
     }
-    return `${task.title} abhi safe hai, ${remaining} bache hain. Koi jaldi nahi.`;
+    return professional
+      ? `${task.title} abhi track par hai, ${remaining} bache hain. Koi jaldi nahi hai.`
+      : `${task.title} abhi safe hai, ${remaining} bache hain. Koi jaldi nahi.`;
   }
 
   // English (default)
-  const stepLine = nextStep ? `Start with ${nextStep}.` : `Start "${task.title}".`;
+  const stepLine = nextStep
+    ? `Start with ${nextStep}.`
+    : `Start "${task.title}".`;
   if (risk === "critical") {
-    return `Heads up. ${task.title} has only ${remaining} left. ${stepLine} You need to start right now.`;
+    return professional
+      ? `Attention. ${task.title} has only ${remaining} left. ${stepLine} This needs to start immediately.`
+      : `Heads up. ${task.title} has only ${remaining} left. ${stepLine} You need to start right now.`;
   }
   if (risk === "high") {
-    return `${task.title} is due in ${remaining}. ${stepLine} Start today.`;
+    return professional
+      ? `${task.title} is due in ${remaining}. ${stepLine} Please start today.`
+      : `${task.title} is due in ${remaining}. ${stepLine} Start today.`;
   }
   if (risk === "medium") {
     return `${task.title} is due in ${remaining}. You have some room, but start soon.`;
@@ -46,9 +63,15 @@ export function buildSpokenNudge(task, risk, language = "en") {
   return `${task.title} is on track with ${remaining} left. No rush yet.`;
 }
 
-export function buildSpokenWarning(warningMessage, language = "en") {
+export function buildSpokenWarning(
+  warningMessage,
+  language = "en",
+  tone = "casual",
+) {
   if (language === "hi") {
-    return `Dhyan do, ek scheduling problem hai. ${warningMessage}`;
+    return tone === "professional"
+      ? `Dhyan dein, ek scheduling samasya hai. ${warningMessage}`
+      : `Dhyan do, ek scheduling problem hai. ${warningMessage}`;
   }
   return `Heads up, there's a scheduling conflict. ${warningMessage}`;
 }

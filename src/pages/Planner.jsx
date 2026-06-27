@@ -8,7 +8,7 @@ import DailySchedule from "../components/planner/DailySchedule.jsx";
 import TaskDetails from "../components/task/TaskDetails.jsx";
 
 export default function Planner() {
-  const { tasks, prioritized, pendingTasks, toggleSubtask, setSubtasks, completeTask } = useTasks();
+  const { tasks, prioritized, pendingTasks, toggleSubtask, setSubtasks, completeTask, deleteTask } = useTasks();
   const { blocks, loading, error, generate } = useSchedule(pendingTasks);
   const [openTaskId, setOpenTaskId] = useState(null);
 
@@ -42,6 +42,7 @@ export default function Planner() {
           onToggleSubtask={toggleSubtask}
           onSetSubtasks={setSubtasks}
           onComplete={completeTask}
+          onDelete={deleteTask}
         />
       )}
     </div>

@@ -5,8 +5,9 @@ import { formatDeadlineDate, formatTimeRemaining, riskLevel, RISK_COLORS } from 
 import { useVoiceContext } from "../../context/VoiceContext";
 import SpeakButton from "../voice/SpeakButton.jsx";
 
-export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubtasks, onComplete }) {
+export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubtasks, onComplete, onDelete }) {
   const [generating, setGenerating] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const { speak, settings } = useVoiceContext();
   if (!task) return null;
 
@@ -50,9 +51,64 @@ export default function TaskDetails({ task, onClose, onToggleSubtask, onSetSubta
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <h3 style={{ fontSize: 18 }}>{task.title}</h3>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-dim)", fontSize: 18 }}>
-            ✕
-          </button>
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            {!confirmingDelete ? (
+              <button
+                onClick={() => setConfirmingDelete(true)}
+                title="Delete task"
+                style={{
+                  background: "none",
+                  border: "1px solid var(--border)",
+                  color: "var(--urgent)",
+                  fontSize: 12,
+                  borderRadius: "var(--radius-sm)",
+                  padding: "4px 8px",
+                  cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
+            ) : (
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <span style={{ fontSize: 12, color: "var(--text-muted)" }}>Sure?</span>
+                <button
+                  onClick={() => {
+                    onDelete(task.id);
+                    onClose();
+                  }}
+                  style={{
+                    background: "var(--urgent)",
+                    border: "none",
+                    color: "#1a0d0a",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    borderRadius: "var(--radius-sm)",
+                    padding: "4px 10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Yes, delete
+                </button>
+                <button
+                  onClick={() => setConfirmingDelete(false)}
+                  style={{
+                    background: "none",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-muted)",
+                    fontSize: 12,
+                    borderRadius: "var(--radius-sm)",
+                    padding: "4px 10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+            <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-dim)", fontSize: 18 }}>
+              ✕
+            </button>
+          </div>
         </div>
 
         <p style={{ color: "var(--text-muted)", fontSize: 13, marginTop: 8 }}>{task.description}</p>

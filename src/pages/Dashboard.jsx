@@ -15,6 +15,7 @@ export default function Dashboard() {
     completeTask,
     toggleSubtask,
     setSubtasks,
+    deleteTask,
   } = useTasks();
   const stats = useProgress();
   const [openTaskId, setOpenTaskId] = useState(null);
@@ -78,6 +79,7 @@ export default function Dashboard() {
           onToggleSubtask={toggleSubtask}
           onSetSubtasks={setSubtasks}
           onComplete={completeTask}
+          onDelete={deleteTask}
         />
       )}
     </div>

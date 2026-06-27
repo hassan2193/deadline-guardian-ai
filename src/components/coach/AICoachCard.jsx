@@ -10,7 +10,7 @@ export default function AICoachCard({ task, nudge, risk }) {
   const { speak, settings } = useVoiceContext();
   const spokenRef = useRef(false);
 
-  const spokenText = buildSpokenNudge(task, risk, settings.language);
+  const spokenText = buildSpokenNudge(task, risk, settings.language, settings.tone);
 
   // Auto-speak once per card mount, only for critical/high risk tasks,
   // and only if the user hasn't turned auto-speak off.

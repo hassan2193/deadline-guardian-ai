@@ -11,12 +11,15 @@ const DEFAULT_SETTINGS = {
   enabled: true, // master on/off
   autoSpeak: true, // speak automatically for high-risk / critical tasks
   language: "en", // "en" | "hi"
+  tone: "casual", // "casual" (bhai/dost) | "professional"
 };
 
 function loadSettings() {
   try {
     const saved = localStorage.getItem(SETTINGS_KEY);
-    return saved ? { ...DEFAULT_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SETTINGS;
+    return saved
+      ? { ...DEFAULT_SETTINGS, ...JSON.parse(saved) }
+      : DEFAULT_SETTINGS;
   } catch {
     return DEFAULT_SETTINGS;
   }
@@ -28,7 +31,9 @@ function pickVoice(voices, language) {
   const langPrefix = wantHindi ? "hi" : "en";
 
   // Prefer an exact language-prefix match.
-  const match = voices.find((v) => v.lang?.toLowerCase().startsWith(langPrefix));
+  const match = voices.find((v) =>
+    v.lang?.toLowerCase().startsWith(langPrefix),
+  );
   if (match) return match;
 
   // Fall back to any English voice (most browsers always ship one),
@@ -48,25 +53,61 @@ function spellOutAbbreviations(text) {
 
 // Time strings like "3h left", "45m left", "2d 6h" use single-letter
 // units that read fine visually but get spoken as the literal letter
-// ("h") instead of "hours". Expand them into words before speaking.
+// ("h") instead of "hours". Expand them into words before speaking,
+// using the correct singular form when the count is exactly 1.
 function expandTimeUnits(text, language) {
-  const words =
+  const plural =
     language === "hi"
       ? { h: "ghante", m: "minute", d: "din" }
       : { h: "hours", m: "minutes", d: "days" };
+  const singular =
+    language === "hi"
+      ? { h: "ghanta", m: "minute", d: "din" }
+      : { h: "hour", m: "minute", d: "day" };
 
-  return text.replace(/(\d+)\s?(h|m|d)\b/g, (_, num, unit) => `${num} ${words[unit]}`);
+  return text.replace(/(\d+)\s?(h|m|d)\b/g, (_, num, unit) => {
+    const n = parseInt(num, 10);
+    const word = n === 1 ? singular[unit] : plural[unit];
+    return `${num} ${word}`;
+  });
 }
 
 // Hindi number words for 0-99, enough to cover realistic hour/minute/day
 // counts. Mixing Hindi voice + raw digits sounds inconsistent (engine
 // reads digits in English), so in Hindi mode we spell numbers out fully.
 const HINDI_ONES = [
-  "shunya", "ek", "do", "teen", "chaar", "paanch", "chhah", "saat", "aath", "nau",
-  "das", "gyarah", "barah", "terah", "chaudah", "pandrah", "solah", "satrah", "atharah", "unnees",
+  "shunya",
+  "ek",
+  "do",
+  "teen",
+  "chaar",
+  "paanch",
+  "chhah",
+  "saat",
+  "aath",
+  "nau",
+  "das",
+  "gyarah",
+  "barah",
+  "terah",
+  "chaudah",
+  "pandrah",
+  "solah",
+  "satrah",
+  "atharah",
+  "unnees",
 ];
 const HINDI_TENS = [
-  "", "", "bees", "tees", "chaalees", "pachaas", "saath", "sattar", "assi", "navve",
+  "",
+  "",
+  "bees",
+  "tees",
+  "chaalees",
+  "pachaas",
+  "saath",
+  "sattar",
+  "assi",
+  "navve",
 ];
 
 function numberToHindiWords(n) {
@@ -74,21 +115,38 @@ function numberToHindiWords(n) {
   if (n < 100) {
     const tens = Math.floor(n / 10);
     const ones = n % 10;
-    return ones === 0 ? HINDI_TENS[tens] : `${HINDI_ONES[ones]} ${HINDI_TENS[tens]}`;
+    return ones === 0
+      ? HINDI_TENS[tens]
+      : `${HINDI_ONES[ones]} ${HINDI_TENS[tens]}`;
   }
   return String(n); // fall back for anything larger than realistic deadlines
 }
 
 function spellOutNumbers(text, language) {
   if (language !== "hi") return text;
-  return text.replace(/\b\d{1,2}\b/g, (match) => numberToHindiWords(parseInt(match, 10)));
+  return text.replace(/\b\d{1,2}\b/g, (match) =>
+    numberToHindiWords(parseInt(match, 10)),
+  );
+}
+
+// Symbols read awkwardly by TTS ("/" -> "slash", "&" -> "and" said abruptly).
+// Replace with natural words/pauses so sentences flow instead of sounding
+// like raw text being read character-by-character.
+function cleanSymbolsForSpeech(text) {
+  return text
+    .replace(/\s*\/\s*/g, " or ")
+    .replace(/\s*&\s*/g, " and ")
+    .replace(/\s*-\s*/g, " ")
+    .replace(/\s*—\s*/g, ", ")
+    .replace(/[_*#]/g, "");
 }
 
 export function useVoice() {
   const [settings, setSettings] = useState(loadSettings);
   const [voices, setVoices] = useState([]);
   const [speaking, setSpeaking] = useState(false);
-  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const supported =
+    typeof window !== "undefined" && "speechSynthesis" in window;
   const queueRef = useRef([]);
 
   useEffect(() => {
@@ -100,7 +158,8 @@ export function useVoice() {
     const loadVoices = () => setVoices(window.speechSynthesis.getVoices());
     loadVoices();
     window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
-    return () => window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
+    return () =>
+      window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
   }, [supported]);
 
   const speak = useCallback(
@@ -117,10 +176,18 @@ export function useVoice() {
       // and a stale closure can keep picking the wrong/default voice even
       // after the real list has loaded.
       const liveVoices = window.speechSynthesis.getVoices();
-      const voice = pickVoice(liveVoices.length ? liveVoices : voices, settings.language);
+      const voice = pickVoice(
+        liveVoices.length ? liveVoices : voices,
+        settings.language,
+      );
 
-      const cleanedText = spellOutAbbreviations(
-        spellOutNumbers(expandTimeUnits(text, settings.language), settings.language),
+      const cleanedText = cleanSymbolsForSpeech(
+        spellOutAbbreviations(
+          spellOutNumbers(
+            expandTimeUnits(text, settings.language),
+            settings.language,
+          ),
+        ),
       );
       const utterance = new SpeechSynthesisUtterance(cleanedText);
       if (voice) {

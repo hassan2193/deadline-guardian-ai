@@ -10,7 +10,7 @@ Built using **React**, **Vite**, and **Google Gemini AI** for the **Google AI St
 
 ## 🌐 Live Demo
 
-https://your-deployment-url
+https://deadline-guardian-ai-193092414626.us-central1.run.app
 
 ---
 

@@ -10,7 +10,7 @@ Built using **React**, **Vite**, and **Google Gemini AI** for the **Google AI St
 
 ## 🌐 Live Demo
 
-https://deadline-guardian-ai-193092414626.us-central1.run.app
+https://deadline-guardian-ai.netlify.app/
 
 ---
 
